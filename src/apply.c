@@ -293,6 +293,11 @@ static int apply_binary(
 	git_buf reverse = GIT_BUF_INIT;
 	int error;
 
+	if (patch->binary.empty_data) {
+		error = apply_err("patch does not contain binary data");
+		goto done;
+	}
+
 	/* first, apply the new_file delta to the given source */
 	if ((error = apply_binary_delta(out, source, source_len,
 			&patch->binary.new_file)) < 0)

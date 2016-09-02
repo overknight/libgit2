@@ -240,7 +240,7 @@ void test_apply_fromdiff__binary_no_change(void)
 	cl_git_pass(apply_gitbuf(
 		&original, "binary.bin",
 		&original, "binary.bin",
-		"", &binary_opts));
+		"GIT binary patch\nliteral 0\n\nliteral 0\n\n", &binary_opts));
 }
 
 void test_apply_fromdiff__binary_change_delta(void)

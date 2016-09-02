@@ -342,7 +342,7 @@ done:
 
 static int diff_binary(git_patch_generated_output *output, git_patch_generated *patch)
 {
-	git_diff_binary binary = {{0}};
+	git_diff_binary binary = {0};
 	const char *old_data = patch->ofile.map.data;
 	const char *new_data = patch->nfile.map.data;
 	size_t old_len = patch->ofile.map.len,
@@ -366,6 +366,8 @@ static int diff_binary(git_patch_generated_output *output, git_patch_generated *
 				&binary.new_file.inflatedlen,
 				old_data, old_len, new_data, new_len)) < 0)
 			return error;
+	} else {
+		binary.empty_data = 1;
 	}
 
 	error = giterr_set_after_callback_function(
